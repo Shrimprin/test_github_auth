@@ -58,3 +58,7 @@ end
 
 gem 'devise'
 gem 'dotenv-rails'
+
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
