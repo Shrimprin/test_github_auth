@@ -56,12 +56,12 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'devise'
-gem 'dotenv-rails'
+gem "devise"
+gem "dotenv-rails"
 
-gem 'omniauth'
-gem 'omniauth-github'
-gem 'omniauth-rails_csrf_protection'
+gem "omniauth"
+gem "omniauth-github"
+gem "omniauth-rails_csrf_protection"
 group :development, :test do
-  gem 'dotenv-rails'
+  gem "dotenv-rails"
 end
