@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[ここ](https://github.com/settings/applications/new)にアクセスして、以下の情報を入力する
+|  |  |
+| ---- | ---- |
+| Homepage URL | http://localhost:3000 |
+| Authorization callback URL | http://localhost:3000/users/auth/github/callback |
