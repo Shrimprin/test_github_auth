@@ -16,10 +16,16 @@ class RepositoriesController < ApplicationController
   def edit; end
 
   def create
-    @repository = Repository.new(repository_params)
+    client = Octokit::Client.new(access_token: current_user.access_token)
+    url = repository_params[:url] # 正規表現とかでチェックする必要はありそう
+    repository_path = URI(url).path[1..] # /user/repository
+    repository_info = client.repository(repository_path)
+    repository_name = repository_info.name
+
+    @repository = Repository.new(user: current_user, name: repository_name, path: repository_path)
 
     respond_to do |format|
-      if @repository.save
+      if @repository.save_with_file_items(client)
         format.html { redirect_to @repository, notice: 'Repository was successfully created.' }
         format.json { render :show, status: :created, location: @repository }
       else
@@ -57,6 +63,6 @@ class RepositoriesController < ApplicationController
   end
 
   def repository_params
-    params.require(:repository).permit(:user_id, :name)
+    params.require(:repository).permit(:url)
   end
 end

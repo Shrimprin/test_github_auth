@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_16_045524) do
     t.integer "repository_id", null: false
     t.string "name", null: false
     t.integer "type", null: false
-    t.text "content", null: false
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["repository_id"], name: "index_file_items_on_repository_id"
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_16_045524) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "url", null: false
+    t.string "path", null: false
     t.index ["user_id"], name: "index_repositories_on_user_id"
   end
 
