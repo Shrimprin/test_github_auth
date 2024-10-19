@@ -7,11 +7,14 @@ class User < ApplicationRecord
 
   validates :uid, presence: true, uniqueness: { scope: :provider }
 
+  has_many :repositories, dependent: :destroy
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
-      user.email = auth.info.email # 消していいかも
+      user.name = auth.info.name
+      user.access_token = auth.credentials.token
     end
   end
 end

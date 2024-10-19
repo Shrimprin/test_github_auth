@@ -22,7 +22,7 @@
 
     <p class="navbar-text pull-right">
       <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>.
+        Logged in as <strong><%= current_user.name %></strong>.
         <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-link' %>
       <% else %>
         <%= button_to "Sign in with GitHub", user_github_omniauth_authorize_path, data: { turbo: false } %>

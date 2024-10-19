@@ -3,28 +3,29 @@
 class RepositoriesController < ApplicationController
   before_action :set_repository, only: %i[show edit update destroy]
 
-  # GET /repositories or /repositories.json
   def index
     @repositories = Repository.all
   end
 
-  # GET /repositories/1 or /repositories/1.json
   def show; end
 
-  # GET /repositories/new
   def new
     @repository = Repository.new
   end
 
-  # GET /repositories/1/edit
   def edit; end
 
-  # POST /repositories or /repositories.json
   def create
-    @repository = Repository.new(repository_params)
+    client = Octokit::Client.new(access_token: current_user.access_token)
+    url = repository_params[:url] # 正規表現とかでチェックする必要はありそう
+    repository_path = URI(url).path[1..] # /user/repository
+    repository_info = client.repository(repository_path)
+    repository_name = repository_info.name
+
+    @repository = Repository.new(user: current_user, name: repository_name, path: repository_path)
 
     respond_to do |format|
-      if @repository.save
+      if @repository.save_with_file_items(client)
         format.html { redirect_to @repository, notice: 'Repository was successfully created.' }
         format.json { render :show, status: :created, location: @repository }
       else
@@ -34,7 +35,6 @@ class RepositoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /repositories/1 or /repositories/1.json
   def update
     respond_to do |format|
       if @repository.update(repository_params)
@@ -47,7 +47,6 @@ class RepositoriesController < ApplicationController
     end
   end
 
-  # DELETE /repositories/1 or /repositories/1.json
   def destroy
     @repository.destroy!
 
@@ -59,13 +58,11 @@ class RepositoriesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_repository
     @repository = Repository.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def repository_params
-    params.require(:repository).permit(:user_id, :name)
+    params.require(:repository).permit(:url)
   end
 end
