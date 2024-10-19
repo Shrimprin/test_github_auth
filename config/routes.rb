@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" } # devise/omniauth_callbacksの代わりに、users/omniauth_callbacksを使用する
-  resources :repositories
+  resources :repositories do
+    resources :file_items, only: [:show]
+  end
   root to: "repositories#index"
 
   # deviseのログアウト

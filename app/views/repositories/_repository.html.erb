@@ -1,7 +1,7 @@
 <div id="<%= dom_id repository %>">
   <p>
     <strong>User:</strong>
-    <%= repository.user_id %>
+    <%= repository.user.name %>
   </p>
 
   <p>
@@ -9,4 +9,5 @@
     <%= repository.name %>
   </p>
 
+  <%= render 'file_items', repository: %>
 </div>
