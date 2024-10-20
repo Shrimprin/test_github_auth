@@ -1,8 +1,8 @@
-  <h3>File Items:</h3>
-  <ul>
-    <% repository.file_items.each do |file_item| %>
-      <li>
-        <%= link_to file_item.name, repository_file_item_path(repository, file_item) %>
-      </li>
-    <% end %>
-  </ul>
+<ul>
+  <% file_items.each do |file_item| %>
+    <li>
+      <%= link_to file_item.name, repository_file_item_path(file_item.repository, file_item) %>
+      <%= render 'file_items', file_items: file_item.children %>
+    </li>
+  <% end %>
+</ul>
