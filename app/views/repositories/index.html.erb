@@ -6,9 +6,8 @@
 
 <div id="repositories">
   <% @repositories.each do |repository| %>
-    <%= render repository %>
     <p>
-      <%= link_to "Show this repository", repository %>
+      <%= link_to repository.name, repository %>
     </p>
   <% end %>
 </div>

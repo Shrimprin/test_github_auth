@@ -9,5 +9,6 @@
     <%= repository.name %>
   </p>
 
-  <%= render 'file_items', repository: %>
+  <strong>File Items:</strong>
+  <%= render 'file_items', file_items: root_file_items(repository) %>
 </div>
