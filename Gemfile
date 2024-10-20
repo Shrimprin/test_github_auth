@@ -59,6 +59,7 @@ group :test do
   gem 'selenium-webdriver'
 end
 
+gem 'closure_tree'
 gem 'devise'
 gem 'octokit'
 gem 'omniauth'
